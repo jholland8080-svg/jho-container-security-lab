@@ -1,0 +1,6 @@
+# The "naive" image: big, old base image, runs as root, full OS with shell and package manager.
+FROM python:3.9
+WORKDIR /app
+COPY app.py .
+EXPOSE 8080
+CMD ["python", "app.py"]

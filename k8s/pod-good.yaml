@@ -1,0 +1,29 @@
+# A hardened pod: non-root, no privilege escalation, read-only filesystem, all Linux capabilities dropped.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-good
+  labels:
+    app: app-good
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65532
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: app
+      image: lab/app-good:1.0
+      imagePullPolicy: Never
+      ports:
+        - containerPort: 8080
+      securityContext:
+        runAsNonRoot: true
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true
+        capabilities:
+          drop: ["ALL"]
+      resources:
+        limits:
+          cpu: 200m
+          memory: 128Mi

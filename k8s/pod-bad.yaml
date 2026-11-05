@@ -1,0 +1,16 @@
+# A pod that breaks every rule: root, privileged, :latest tag.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-bad
+  labels:
+    app: app-bad
+spec:
+  containers:
+    - name: app
+      image: lab/app-bad:latest
+      imagePullPolicy: Never
+      ports:
+        - containerPort: 8080
+      securityContext:
+        privileged: true

@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-latest-tag
+spec:
+  background: true
+  rules:
+    - name: require-specific-tag
+      match:
+        any:
+          - resources:
+              kinds: ["Pod"]
+      validate:
+        failureAction: Audit   # Step 4 switches this to Enforce
+        message: "Images must use a specific version tag, not :latest."
+        pattern:
+          spec:
+            containers:
+              - image: "!*:latest"

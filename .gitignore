@@ -1,0 +1,4 @@
+# Lab outputs
+sbom-*.json
+cosign.key
+cosign.pub
