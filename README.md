@@ -175,8 +175,8 @@ docker run -d -p 5001:5000 --name registry registry:2
 
 docker tag lab/app-good:1.0 localhost:5001/app-good:1.0
 docker push localhost:5001/app-good:1.0
-IMAGE=$(docker inspect --format='{{index .RepoDigests 0}}' localhost:5001/app-good:1.0)
-echo $IMAGE
+IMAGE=$(docker inspect --format='{{range .RepoDigests}}{{println .}}{{end}}' localhost:5001/app-good:1.0 | grep '^localhost:5001/')
+echo $IMAGE     # must start with localhost:5001/app-good@sha256:
 
 # Create a key pair (empty password is fine for a lab)
 COSIGN_PASSWORD="" cosign generate-key-pair
