@@ -238,7 +238,7 @@ kubectl logs -n falco -l app.kubernetes.io/name=falco -c falco --tail=50 | grep 
 
 **Interview takeaway:** "Runtime detection catches what got past build and admission. In production I'd use Falco, GuardDuty Runtime Monitoring, Prisma Defender, or the Wiz Sensor, and send alerts to the SIEM."
 
----
+---helm 
 
 ## Step 7: Clean up
 
